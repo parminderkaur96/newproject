@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<style>
+    form {
+    width: 900px;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-left: 263px;
+
+}
+</style>
+<form id="contact-form" class="contact-form" method="post">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                         {% csrf_token %}
+                                           {{form.as_p}}
+                                        <button class="btn btn-primary solid blank mt-3" type="submit">
+                                            submit</button>
+                                    </div>
+                                </div>
+                            </form>
+{% endblock content %}

@@ -1,0 +1,93 @@
+
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<body>
+
+		<section class="slider mt-4">
+		<div class="container-fluid">
+			<div class="row no-gutters">
+				<div class="col-lg-12 col-sm-12 col-md-12 slider-wrap">
+					{% for post_list in post_list %}
+					<div class="slider-item">
+						<div class="slider-item-content">
+							<div class="post-thumb mb-4">
+
+                           <a href="{% url 'blogpost' post_list.id %}">
+
+									{% if post_list.image %}
+
+									<img src="{{post_list.image.url}}" alt="" class="img-fluid"></a>
+									{% else %}
+									<img src="" alt="" class="img-fluid">
+
+									{% endif %}
+
+							</div>
+
+							<div class="slider-post-content">
+
+
+								<span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">{{post_list.title}}</span>
+								<h3 class="post-title mt-1"><a href="blog-single.html"></a>{{post_list.desc}}</h3>
+								<span class=" text-muted  text-capitalize">{{post_list.Category}}</span>
+<!--								<p class="lead my-3">Like by : {{post_list.like_by.count}} </p>-->
+<!--								<p class="lead my-3"><i class="fa-solid fa-heart" style="color: #f60404;"></i>{{post_list.like_by.count}}</p>-->
+								 {% if request.user in post_list.like_by.all %}
+                                         <span><a href="{% url  'dislike_post' post_list.id  %}"><i class="fa-solid fa-heart"></i></a></span>
+								        {% else %}
+								          <span><a href="{% url  'like_post' post_list.id  %}"><i class="fa-solid fa-heart" style="color: #f60404;"></i></a> {{post_list.like_by.count}}</span>
+                                   {% endif %}
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="row">
+						{% for post_list in post_list %}
+						<div class="col-lg-3 col-md-6">
+							<article class="post-grid mb-5">
+                     <a class="post-thumb mb-4 d-block" href="{% url 'blogpost' post_list.id %}">
+									{% if post_list.image %}
+									<img src="{{post_list.image.url}}" alt="" class="img-fluid w-100">
+									{% else %}
+									<img src="" alt="" class="img-fluid w-100"></a>
+									{% endif %}
+
+								<span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">{{post_list.title}}</span>
+								<h3 class="post-title mt-1"><a href="blog-single.html">{{post_list.desc}}</a></h3>
+
+								<span class="text-muted letter-spacing text-uppercase font-sm">{{post_list.Category}}</span>
+								<span class=" text-muted  text-capitalize">{{post_list.created_at}}</span>
+<!--								<p class="lead my-3"><i class="fa-solid fa-heart" style="color: #f60404;"></i>{{post_list.like_by.count}}</p>-->
+                             	{% if request.user in post_list.like_by.all %}
+                                         <span><a href="{% url  'dislike_post' post_list.id  %}"><i class="fa-solid fa-heart"></i></a></span>
+								{% else %}
+								          <span><a href="{% url  'like_post' post_list.id  %}"><i class="fa-solid fa-heart" style="color: #f60404;"></i></a> {{post_list.like_by.count}}</span>
+								{% endif %}
+							</article>
+						</div>
+						{% endfor %}
+
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+	</section>
+
+
+{% endblock content %}

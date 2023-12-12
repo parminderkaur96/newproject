@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<!--<style>-->
+<!--    form {-->
+<!--    width: 900px;-->
+<!--    margin: 0 auto;-->
+<!--    padding-top: 30px;-->
+<!--    padding-left: 263px;-->
+
+<!--}-->
+<!--</style>-->
+<div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1>Create Post</h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Create Post" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
