@@ -1,9 +1,11 @@
 from django import forms
 from django.forms import ModelForm
 from.models import Category,Tag
-
-category_choices = Category.objects.all().values_list('id','name')
-
+try:
+    category_choices =[]
+except :
+    category_choices = []
+    print('Categories do not exist')
 class UserRegistrationForm(forms.Form):
     username = forms.CharField(label="Your name", max_length=100,widget=forms.TextInput(attrs={'class': "form-control",'style':
                                                                                                'width:45%'}))
